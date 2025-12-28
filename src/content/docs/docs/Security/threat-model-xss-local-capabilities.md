@@ -105,8 +105,10 @@ fabric.Image.fromURL(userProvidedURL, function(img) {
   canvas.add(img);
 });
 
-// VULNERABLE: SVG data URI with embedded script
-const maliciousSVG = 'data:image/svg+xml,<svg><script>...</script></svg>';
+// VULNERABLE: SVG data URI with embedded script  
+// Example shows attack pattern (DO NOT USE)
+const maliciousSVG = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><script>alert("XSS")</script></svg>';
+fabric.Image.fromURL(maliciousSVG); // This would execute the script
 ```
 
 **Impact with Local Capabilities**:
@@ -144,8 +146,9 @@ const rect = new fabric.Rect({
 
 **Example Vulnerable Pattern**:
 ```javascript
-// VULNERABLE: Dynamically adding event handlers from untrusted source
-canvas.on(eventType, eval(userProvidedHandler));
+// EXTREMELY DANGEROUS - NEVER USE eval() with user input
+// This is an anti-pattern shown for educational purposes only
+canvas.on(eventType, eval(userProvidedHandler)); // CRITICAL SECURITY FLAW
 ```
 
 ## Combined Attack Scenarios
@@ -217,9 +220,10 @@ function loadSafeJSON(jsonData) {
 2. **Text Content**:
 ```javascript
 // SECURE: Use built-in escaping utilities
-import { escapeXml } from 'fabric/util/string';
-
-const text = new fabric.Text(escapeXml(userInput), {
+// The exact import path may vary based on your Fabric.js version
+// Use fabric.util.string.escapeXml() if available as a namespace method
+const escapedText = fabric.util.string.escapeXml(userInput);
+const text = new fabric.Text(escapedText, {
   fontFamily: validateFontName(userSelectedFont)
 });
 ```

@@ -1,9 +1,10 @@
 ---
+date: '2025-12-28'
 title: 'Security'
 description: 'Security guidelines and threat models for Fabric.js applications'
 sidebar:
   label: 'Security Overview'
-  order: 0
+  order: 700
 ---
 
 # Security

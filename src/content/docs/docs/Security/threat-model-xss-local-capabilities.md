@@ -1,9 +1,10 @@
 ---
+date: '2025-12-28'
 title: 'Threat Model: XSS + Local Capabilities'
 description: 'Security threat modeling for combined Web XSS and local capability risks in Fabric.js'
 sidebar:
   label: 'XSS + Local Capabilities'
-  order: 1
+  order: 701
 ---
 
 # Threat Model: Web XSS + Local Capabilities Combined Risks
